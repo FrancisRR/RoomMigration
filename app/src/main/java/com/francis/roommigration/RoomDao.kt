@@ -22,4 +22,8 @@ interface RoomDao {
 
     @Delete
     fun delete(data: ContactModel?)
+
+    @Query("DELETE FROM ContactModel")
+    fun nukeTable()
+
 }

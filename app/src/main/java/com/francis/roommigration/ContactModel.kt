@@ -12,3 +12,6 @@ data class ContactModel(
     @ColumnInfo(name = "age") var age: Int?,
     @ColumnInfo(name = "isVerified") var isVerified: Boolean?
 )
+
+
+//@TypeConverters(Converters.class)  subclass
