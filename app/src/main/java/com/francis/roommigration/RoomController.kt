@@ -9,12 +9,14 @@ open class RoomController(private val context: Context?) {
 
 
     internal fun roomInstance() = Room.databaseBuilder(context!!, RoomDatabaseEx::class.java, "demo_db")
-        .fallbackToDestructiveMigration().build()
+        .addMigrations(migration1)
+        .addMigrations(migration2)
+        .build()
 
 
     val migration1 = object : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            val MigString = "ALTER TABLE ContactModel ADD COLUMN age INTEGER NOT NULL DEFAULT 0"
+            val MigString = "CREATE TABLE 'UserModel' ('name' TEXT NOT NULL, PRIMARY KEY (`name`) ) "
             database.execSQL(MigString)
         }
     }
@@ -22,9 +24,10 @@ open class RoomController(private val context: Context?) {
 
     val migration2 = object : Migration(2, 3) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            val migString = "ALTER TABLE ContactModel ADD COLUMN isVerified Boolean"
-            database.execSQL(migString)
+            val MigString = "ALTER TABLE ContactModel ADD COLUMN isNew INTEGER NOT NULL DEFAULT 1"
+            database.execSQL(MigString)
         }
     }
+
 
 }

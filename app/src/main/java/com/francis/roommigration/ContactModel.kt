@@ -10,7 +10,8 @@ data class ContactModel(
     @ColumnInfo(name = "name") var name: String?,
     @PrimaryKey @ColumnInfo(name = "number") var number: String,
     @ColumnInfo(name = "age") var age: Int?,
-    @ColumnInfo(name = "isVerified") var isVerified: Boolean?
+    @ColumnInfo(name = "isVerified") var isVerified: Boolean?,
+    @ColumnInfo(name = "isNew") var isNew: Boolean
 )
 
 

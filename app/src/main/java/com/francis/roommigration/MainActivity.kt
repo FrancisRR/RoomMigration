@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val obj = ContactModel(name, number, 24, true)
+        val obj = ContactModel(name, number, 24, true, false)
         GlobalScope.async {
             roomDb?.getDao()?.insert(obj)
 
@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         list?.forEach { data ->
             stringBuilder.append("Name :${data.name}\nNumber :${data.number}\nAge :${data.age}")
             stringBuilder.append("\n\n")
+            Log.e(TAG, "ddd" + data.isNew)
         }
         tvList.setText(stringBuilder.toString())
     }
