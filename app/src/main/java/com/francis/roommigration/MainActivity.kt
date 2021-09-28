@@ -54,7 +54,11 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val obj = ContactModel(name, number, 24, true, false)
+        val subModelList = mutableListOf<SubModel>()
+        subModelList.add(SubModel(name, number))
+
+        val childModel =ChildModel(name,number)
+        val obj = ContactModel(name, number, 24, true, false, subModelList,childModel)
         GlobalScope.async {
             roomDb?.getDao()?.insert(obj)
 
@@ -66,9 +70,10 @@ class MainActivity : AppCompatActivity() {
 
     internal fun delete() {
         val name = editText.text.toString()
-        Completable.defer { roomDb?.getDao()?.deleteId(name) }.subscribeOn(Schedulers.io()).subscribe {
-            Log.e(TAG, "contact deleted")
-        }
+        Completable.defer { roomDb?.getDao()?.deleteId(name) }.subscribeOn(Schedulers.io())
+            .subscribe {
+                Log.e(TAG, "contact deleted")
+            }
 
 //        if (!TextUtils.isEmpty(name)) {
 //            val job = GlobalScope.async {
@@ -82,8 +87,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun varAss(vararg data: String?) {
-        data.forEach { Log.e(TAG, it) }
-
+        data.forEach { Log.e(TAG, "${it}") }
     }
 
     private fun syncData() {

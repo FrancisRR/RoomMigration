@@ -6,6 +6,7 @@ class AppController : Application() {
 
 
     private var roomDb: RoomDatabaseEx? = null
+
     override fun onCreate() {
         super.onCreate()
         appController = this
